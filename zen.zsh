@@ -62,8 +62,8 @@ convert_sec() {
   ((m=(${1}%3600)/60))
   ((s=${1}%60))
 
-  # skip printing if value is zero
-  [[ $h -gt 0 ]] && printf "%2dh " $h
-  [[ $m -gt 0 ]] && printf "%2dm " $m
-  [[ $s -gt 0 ]] && printf "%2ds" $s
+  # only print if value is more than zero
+  [[ $h -gt 0 ]] && printf "%dh " $h
+  [[ $m -gt 0 ]] && printf "%dm " $m
+  [[ $s -gt 0 ]] && printf "%3ds" $s
 }
