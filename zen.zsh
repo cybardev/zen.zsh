@@ -65,5 +65,5 @@ convert_sec() {
   # only print if value is more than zero
   [[ $h -gt 0 ]] && printf "%dh " $h
   [[ $m -gt 0 ]] && printf "%dm " $m
-  [[ $s -gt 0 ]] && printf "%ds" $s
+  [[ $s -gt 0 ]] && printf "%ds"  $s
 }
