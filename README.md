@@ -1,2 +1,2 @@
-# zen.sh
+# zen.zsh
 Zen Zsh Prompt
