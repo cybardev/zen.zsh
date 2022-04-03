@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # Zen.sh Zsh Prompt
 #
 # author: Sheikh Saad (https://github.com/cybardev)
@@ -8,6 +9,7 @@
 zen_prompt_style="(λ)"
 zen_prompt_color="#FF69CC" # pink
 zen_dir_color="#46C8FF" # light blue
+zen_min_cmd_duration="5" # minimum duration of last command in seconds
 
 # ---------------------------------------------------------------- #
 
@@ -23,9 +25,9 @@ preexec() {
 # function executed before displaying each prompt line
 precmd() {
   # save the duration of last command
-  if [ $timer ]; then
+  if [[ -n $timer ]]; then
     timer_show=$(($SECONDS - $timer))
-    [[ timer_show -gt 5 ]] && timer_str="$(convert_sec timer_show)"|| timer_str=""
+    [[ timer_show -ge $zen_min_cmd_duration ]] && timer_str="$(convert_sec timer_show)"|| timer_str=""
     unset timer
   fi
 
