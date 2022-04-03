@@ -14,7 +14,9 @@ zen_min_cmd_duration="5" # minimum duration of last command in seconds
 # ---------------------------------------------------------------- #
 
 # zsh options
-autoload -Uz vcs_info colors; colors
+autoload -Uz vcs_info colors; vcs_info; colors
+zstyle ":vcs_info:*" enable git
+zstyle ":vcs_info:*" formats "(%b)"
 setopt prompt_subst
 
 # function executed before each command
@@ -27,16 +29,15 @@ precmd() {
   # save the duration of last command
   if [[ -n $timer ]]; then
     timer_show=$(($SECONDS - $timer))
-    [[ timer_show -ge $zen_min_cmd_duration ]] && timer_str="$(convert_sec timer_show)"|| timer_str=""
+    [[ timer_show -ge $zen_min_cmd_duration ]] \
+      && timer_str="$(convert_sec timer_show)" \
+      || timer_str=""
     unset timer
   fi
 
   # prompt style
-  vcs_info
-  zstyle ":vcs_info:*" enable git
-  zstyle ":vcs_info:*" formats "(%b)"
   PROMPT="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style %F{default}"
-  RPROMPT="%F{yellow}$timer_str %F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_%F{default}$(git_status_indicator)"
+  RPROMPT="%F{yellow}$timer_str%F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_%F{default}$(git_status_indicator)"
 }
 
 # print a color-coded symbol to represent the current git status
@@ -65,5 +66,5 @@ convert_sec() {
   # only print if value is more than zero
   [[ $h -gt 0 ]] && printf "%dh " $h
   [[ $m -gt 0 ]] && printf "%dm " $m
-  [[ $s -gt 0 ]] && printf "%ds"  $s
+  [[ $s -gt 0 ]] && printf "%ds " $s
 }
