@@ -31,9 +31,10 @@ precmd() {
 
   # prompt style
   vcs_info
+  zstyle ":vcs_info:*" enable git
   zstyle ":vcs_info:*" formats "(%b)"
   PROMPT="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style %F{default}"
-  RPROMPT="%F{yellow}$timer_str %F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_ %F{default}$(git_status_indicator)"
+  RPROMPT="%F{yellow}$timer_str %F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_%F{default}$(git_status_indicator)"
 }
 
 # print a color-coded symbol to represent the current git status
@@ -47,9 +48,9 @@ git_status_indicator() {
   if [[ -z "$git_status" ]]; then
     echo ""
   elif [[ "$git_status" == M* ]]; then
-    echo "%F{yellow}+" # staged changes
+    echo " %F{yellow}+" # staged changes
   else
-    echo "%F{red}!" # unstaged changes
+    echo " %F{red}!" # unstaged changes
   fi
 }
 
