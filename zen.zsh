@@ -36,9 +36,8 @@ precmd() {
     # save the duration of last command
     if [[ -n $timer ]]; then
         timer_show=$(($SECONDS - $timer))
-        [[ timer_show -ge $zen_min_cmd_duration ]] &&
-            timer_str="$(convert_sec timer_show)" ||
-            timer_str=""
+        timer_str="" # initialize to empty string
+        [[ timer_show -ge $zen_min_cmd_duration ]] && timer_str="$(convert_sec timer_show)"
         unset timer
     fi
 
