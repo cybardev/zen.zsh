@@ -5,7 +5,7 @@
 
 # ------------------------ User Config --------------------------- #
 
-zen_prompt_style="(λ)"
+zen_prompt_style="(λ)"     # prompt characters
 zen_prompt_color="#FF69CC" # pink
 zen_dir_color="#46C8FF"    # light blue
 zen_min_cmd_duration="5"   # minimum duration of last command in seconds
@@ -22,7 +22,7 @@ zstyle ":vcs_info:*" enable git
 zstyle ":vcs_info:*" check-for-changes true
 zstyle ":vcs_info:*" stagedstr "%F{yellow}"
 zstyle ":vcs_info:*" unstagedstr "%F{red}"
-zstyle ":vcs_info:*" formats "%c%u(%b)"
+zstyle ":vcs_info:*" formats "%c%u(%b) "
 
 # function executed before each command
 preexec() {
@@ -39,10 +39,17 @@ precmd() {
         unset timer
     fi
 
+    # print newline before prompt, unless first prompt in process
+    case "$NEW_LINE_BEFORE_PROMPT" in
+    "") NEW_LINE_BEFORE_PROMPT=1 ;;
+    *) echo "" ;;
+    esac
+
     # prompt style
     vcs_info                                                                                 # git status
-    PROMPT="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style%F{default} " # left prompt
-    RPROMPT="%F{yellow}$timer_str%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_%F{default}"  # right prompt
+    zen_p1="%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_%F{yellow}$timer_str%F{default}"   # prompt line 1
+    zen_p2="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style%F{default} " # prompt line 2
+    PROMPT="$zen_p1"$'\n'"$zen_p2"                                                           # shell prompt
 }
 
 # convert seconds to the format: 2h 3m 4s
