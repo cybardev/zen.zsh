@@ -14,7 +14,7 @@ zen_min_cmd_duration="5"   # minimum duration of last command in seconds
 
 # zsh options
 setopt prompt_subst
-autoload -Uz vcs_info colors
+autoload -Uz colors vcs_info
 colors
 
 # git status style
