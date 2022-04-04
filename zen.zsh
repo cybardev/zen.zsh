@@ -38,8 +38,8 @@ precmd() {
     fi
 
     # prompt style
-    PROMPT="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style %F{default}" # left prompt
-    RPROMPT="%F{yellow}$timer_str%F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_%F{default}$(git_status_indicator)" # right prompt
+    PROMPT="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style %F{default}"                               # left prompt
+    RPROMPT="%F{yellow}$timer_str%F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}%1v%F{default}$(git_status_indicator)" # right prompt
 }
 
 # print a color-coded symbol to represent the current git status
@@ -51,13 +51,13 @@ git_status_indicator() {
 
     # find color to reflect git status
     case "$git_status" in
-        "" ) echo ""             ;;
-        M* ) echo " %F{yellow}+" ;;  # staged changes
-        *  ) echo " %F{red}!"    ;;  # unstaged changes
+    "") echo "" ;;
+    M*) echo " %F{yellow}+" ;; # staged changes
+    *) echo " %F{red}!" ;;     # unstaged changes
     esac
 }
 
-# convert seconds to the format: 2h 3m 5s
+# convert seconds to the format: 2h 3m 4s
 convert_sec() {
     ((h = ${1} / 3600))
     ((m = (${1} % 3600) / 60))
