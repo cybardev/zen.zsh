@@ -10,15 +10,11 @@ A minimalistic Zsh prompt configuration for `*nix` systems.
 
 ### Install
 
-1. Download `zen.zsh` from the Releases. Link for convenience: [zen.zsh][zen_zsh]
+1. Clone the repository
 
-1. Add the following to the user `.zshrc` file.
+1. Run `install.sh`
 
-```
-source /path/to/zen.zsh
-```
-
-**PS**: _Please replace_ `/path/to/zen.zsh` _with the actual path to the downloaded file._
+1. Follow the instructions displayed
 
 ---
 
