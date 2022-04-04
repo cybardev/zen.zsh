@@ -10,16 +10,22 @@ zen_prompt_style="(λ)"
 zen_prompt_color="#FF69CC" # pink
 zen_dir_color="#46C8FF"    # light blue
 zen_min_cmd_duration="5"   # minimum duration of last command in seconds
+zen_staged_glyph="+"       # git symbol with staged changes
+zen_unstaged_glyph="!"     # git symbol with unstaged changes
 
 # ---------------------------------------------------------------- #
 
 # zsh options
-autoload -Uz vcs_info colors
-vcs_info
-colors
-zstyle ":vcs_info:*" enable git
-zstyle ":vcs_info:*" formats "(%b)"
 setopt prompt_subst
+autoload -Uz vcs_info colors
+colors
+
+# git status style
+zstyle ":vcs_info:*" enable git
+zstyle ":vcs_info:*" check-for-changes true
+zstyle ":vcs_info:*" stagedstr " %F{yellow}$zen_staged_glyph"
+zstyle ":vcs_info:*" unstagedstr " %F{red}$zen_unstaged_glyph"
+zstyle ":vcs_info:*" formats "(%b)%u%c"
 
 # function executed before each command
 preexec() {
@@ -38,23 +44,9 @@ precmd() {
     fi
 
     # prompt style
-    PROMPT="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style %F{default}"                               # left prompt
-    RPROMPT="%F{yellow}$timer_str%F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}%1v%F{default}$(git_status_indicator)" # right prompt
-}
-
-# print a color-coded symbol to represent the current git status
-git_status_indicator() {
-    git_status="" # set default value
-
-    # if current directory is a git repository, set value to git status short output
-    [[ -d "./.git" ]] && git_status="$(git status -s)"
-
-    # find color to reflect git status
-    case "$git_status" in
-    "") echo "" ;;
-    M*) echo " %F{yellow}+" ;; # staged changes
-    *) echo " %F{red}!" ;;     # unstaged changes
-    esac
+    vcs_info                                                                                                     # git status
+    PROMPT="%(?,%F{$zen_prompt_color},%F{red})%(?,,%F{red}%? )$zen_prompt_style%F{default} "                     # left prompt
+    RPROMPT="%F{yellow}$timer_str%F{$zen_prompt_color}%F{$zen_dir_color}%c %F{green}$vcs_info_msg_0_%F{default}" # right prompt
 }
 
 # convert seconds to the format: 2h 3m 4s
