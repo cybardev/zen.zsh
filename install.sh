@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Install script for Zen Zsh prompt
 echo Installing Zen...
 [ ! -d "$HOME/.zsh" ] && mkdir -p "$HOME/.zsh"
