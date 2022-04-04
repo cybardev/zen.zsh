@@ -52,7 +52,7 @@ precmd() {
     PROMPT="$zen_p1"$'\n'"$zen_p2"                                                           # shell prompt
 }
 
-# convert seconds to the format: 2h 3m 4s
+# convert seconds to the format: 1h 2m 3s
 convert_sec() {
     ((h = ${1} / 3600))
     ((m = (${1} % 3600) / 60))
