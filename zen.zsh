@@ -3,9 +3,8 @@
 #
 # author: Sheikh Saad (https://github.com/cybardev)
 
-# ---------------------------------------------------------------- #
+# ------------------------ User Config --------------------------- #
 
-# user config
 zen_prompt_style="(λ)"
 zen_prompt_color="#FF69CC" # pink
 zen_dir_color="#46C8FF"    # light blue
