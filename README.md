@@ -10,9 +10,9 @@ A minimalistic Zsh prompt configuration for `*nix` systems.
 
 ### Install
 
-Download `zen.zsh` from the Releases. Link for convenience: [zen.zsh][zen_zsh]
+1. Download `zen.zsh` from the Releases. Link for convenience: [zen.zsh][zen_zsh]
 
-Add the following to the user `.zshrc` file.
+1. Add the following to the user `.zshrc` file.
 
 ```
 source /path/to/zen.zsh
