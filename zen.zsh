@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# Zen.sh Zsh Prompt
+# Zen.zsh Zsh Prompt
 #
 # author: Sheikh Saad (https://github.com/cybardev)
 
