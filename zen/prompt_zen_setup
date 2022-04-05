@@ -5,19 +5,24 @@
 
 # promptinit initialization function
 prompt_zen_setup() {
-    # ----------------------- User Config ---------------------------- #
+    # ------------------------ User Config --------------------------- #
 
-    zen_prompt_symbol="(λ) "     # prompt characters
-    zen_prompt_color_main="#F7C" # pink
-    zen_prompt_color_err="#E77"  # red
-    zen_dir_color="#4CF"         # light blue
-    zen_min_cmd_duration="5"     # minimum duration of last command in seconds
-    zen_mode="split"             # split, group
+    zen_prompt_symbol="(λ) " # prompt characters
+    zen_min_cmd_duration="5" # minimum duration of last command in seconds
+    zen_mode="split"         # split, group
+
+    # ----------------------- Colors --------------------------------- #
+
+    zen_color_prompt="#F7C" # pink
+    zen_color_err="#E77"    # red
+    zen_color_dir="#4CF"    # blue
+    zen_color_green="#AC8"  # green
+    zen_color_yellow="#FB4" # yellow
 
     # ---------------------------------------------------------------- #
 
     # zsh options
-    prompt_opts=(cr percent sp)
+    prompt_opts=(cr percent sp subst)
     autoload -Uz colors vcs_info
     colors
 
@@ -28,8 +33,8 @@ prompt_zen_setup() {
     # git status style
     zstyle ":vcs_info:*" enable git
     zstyle ":vcs_info:*" check-for-changes true
-    zstyle ":vcs_info:*" stagedstr "%F{yellow}"
-    zstyle ":vcs_info:*" unstagedstr "%F{red}"
+    zstyle ":vcs_info:*" stagedstr "%F{$zen_color_yellow}"
+    zstyle ":vcs_info:*" unstagedstr "%F{$zen_color_err}"
     zstyle ":vcs_info:*" formats "%c%u(%b)"
 }
 
@@ -49,12 +54,12 @@ prompt_zen_precmd() {
     fi
 
     # prompt style
-    vcs_info                                                                                                                                     # initialize git status function
-    reset_color="%F{default}"                                                                                                                    # set default color
-    zen_dir="%F{$zen_dir_color}%c"                                                                                                               # directory
-    [[ -n "$vcs_info_msg_0_" ]] && zen_gitstatus="%F{green}$vcs_info_msg_0_ "                                                                    # git status (only show in git repos)
-    zen_timer="%F{yellow}$timer_str"                                                                                                             # last command duration
-    zen_prompt_style="%(?,%F{$zen_prompt_color_main},%F{$zen_prompt_color_err})%(?,,%F{$zen_prompt_color_err}%? )$zen_prompt_symbol$reset_color" # shell prompt
+    vcs_info                                                                                                                  # initialize git status function
+    reset_color="%F{default}"                                                                                                 # set default color
+    zen_dir="%F{$zen_color_dir}%c"                                                                                            # directory
+    [[ -z "$vcs_info_msg_0_" ]] && zen_gitstatus="" || zen_gitstatus="%F{$zen_color_green}$vcs_info_msg_0_ "                  # git status (only show in git repos)
+    zen_timer="%F{$zen_color_yellow}$timer_str"                                                                               # last command duration
+    zen_prompt_style="%(?,%F{$zen_color_prompt},%F{$zen_color_err})%(?,,%F{$zen_color_err}%? )$zen_prompt_symbol$reset_color" # shell prompt
 
     # mode-dependent configuration
     if [[ "$zen_mode" = "group" ]]; then
