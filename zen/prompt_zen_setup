@@ -57,7 +57,7 @@ prompt_zen_precmd() {
 
     # prompt style
     vcs_info                                                                                                                      # initialize git status function
-    zen_dir="%F{$zen_color_dir}%1~"                                                                                               # directory
+    zen_dir="%F{$zen_color_dir}%."                                                                                               # directory
     [[ -z "$vcs_info_msg_0_" ]] && zen_gitstatus="" || zen_gitstatus="%F{$zen_color_green}$vcs_info_msg_0_ "                      # git status (only show in git repos)
     zen_timer="%F{$zen_color_yellow}$timer_str"                                                                                   # last command duration
     zen_prompt_style="%(?,%F{$zen_color_prompt},%F{$zen_color_err})%(?,,%F{$zen_color_err}%? )$zen_prompt_symbol$zen_color_reset" # shell prompt
