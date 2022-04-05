@@ -19,6 +19,8 @@ prompt_zen_setup() {
     zen_color_green="#AC8"  # green
     zen_color_yellow="#FB4" # yellow
 
+    zen_color_reset="%F{default}" # set default color
+
     # ---------------------------------------------------------------- #
 
     # zsh options
@@ -54,12 +56,11 @@ prompt_zen_precmd() {
     fi
 
     # prompt style
-    vcs_info                                                                                                                  # initialize git status function
-    reset_color="%F{default}"                                                                                                 # set default color
-    zen_dir="%F{$zen_color_dir}%c"                                                                                            # directory
-    [[ -z "$vcs_info_msg_0_" ]] && zen_gitstatus="" || zen_gitstatus="%F{$zen_color_green}$vcs_info_msg_0_ "                  # git status (only show in git repos)
-    zen_timer="%F{$zen_color_yellow}$timer_str"                                                                               # last command duration
-    zen_prompt_style="%(?,%F{$zen_color_prompt},%F{$zen_color_err})%(?,,%F{$zen_color_err}%? )$zen_prompt_symbol$reset_color" # shell prompt
+    vcs_info                                                                                                                      # initialize git status function
+    zen_dir="%F{$zen_color_dir}%c"                                                                                                # directory
+    [[ -z "$vcs_info_msg_0_" ]] && zen_gitstatus="" || zen_gitstatus="%F{$zen_color_green}$vcs_info_msg_0_ "                      # git status (only show in git repos)
+    zen_timer="%F{$zen_color_yellow}$timer_str"                                                                                   # last command duration
+    zen_prompt_style="%(?,%F{$zen_color_prompt},%F{$zen_color_err})%(?,,%F{$zen_color_err}%? )$zen_prompt_symbol$zen_color_reset" # shell prompt
 
     # mode-dependent configuration
     if [[ "$zen_mode" = "group" ]]; then
@@ -69,10 +70,10 @@ prompt_zen_precmd() {
         *) echo "" ;;
         esac
 
-        PS1="$zen_dir $zen_gitstatus$zen_timer$reset_color"$'\n'"$zen_prompt_style" # left prompt group
+        PS1="$zen_dir $zen_gitstatus$zen_timer$zen_color_reset"$'\n'"$zen_prompt_style" # left prompt group
     elif [[ "$zen_mode" = "split" ]]; then
-        PS1="$zen_prompt_style"                             # left prompt
-        RPS1="$zen_timer$zen_gitstatus$zen_dir$reset_color" # right prompt
+        PS1="$zen_prompt_style"                                 # left prompt
+        RPS1="$zen_timer$zen_gitstatus$zen_dir$zen_color_reset" # right prompt
     else
         echo "Unknown mode: $zen_mode"
         exit 1
