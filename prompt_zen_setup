@@ -89,7 +89,7 @@ convert_sec() {
     [[ $h -gt 0 ]] && hms+="$h""h "
     [[ $m -gt 0 ]] && hms+="$m""m "
     [[ $s -gt 0 ]] && hms+="$s""s "
-    echo "${hms% }" # strip trailing whitespace
+    echo -n "${hms% }" # strip trailing whitespace
 }
 
 # initiallize prompt theme
