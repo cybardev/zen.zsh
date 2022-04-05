@@ -10,11 +10,16 @@ A minimalistic Zsh prompt configuration for `*nix` systems.
 
 ### Install
 
-1. Clone the repository
+1. Run `git clone https://github.com/cybardev/zen.zsh.git ~/.zsh/zen`
 
-1. Run `install.sh`
+1. Paste the following into `.zshrc`:
 
-1. Follow the instructions displayed
+```zsh
+fpath+="$HOME/.zsh/zen"
+autoload -Uz promptinit
+promptinit
+prompt zen
+```
 
 ---
 
