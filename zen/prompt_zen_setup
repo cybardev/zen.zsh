@@ -24,7 +24,7 @@ prompt_zen_setup() {
     # ---------------------------------------------------------------- #
 
     # zsh options
-    prompt_opts=(cr percent sp subst)
+    prompt_opts=(cr percent sp)
     autoload -Uz colors vcs_info
     colors
 
