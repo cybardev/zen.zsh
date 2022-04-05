@@ -7,7 +7,7 @@
 prompt_zen_setup() {
     # ------------------------ User Config --------------------------- #
 
-    zen_mode="group"         # split, group
+    zen_mode="split"         # split, group
     zen_prompt_symbol="(λ) " # prompt characters
     zen_min_cmd_duration="5" # minimum duration of last command in seconds
 
