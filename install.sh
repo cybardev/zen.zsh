@@ -4,7 +4,7 @@
 echo Installing Zen...
 [ ! -d "$HOME/.zsh" ] && mkdir -p "$HOME/.zsh"
 if [ ! -d "$HOME/.zsh/zen" ]; then
-    cp -r "./zen" "$HOME/.zsh/"
+    cp -r "zen" "$HOME/.zsh/"
 else
     echo "$HOME/.zsh/zen already exists."
     echo Zen prompt was not installed.
