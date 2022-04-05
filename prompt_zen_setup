@@ -71,7 +71,7 @@ prompt_zen_precmd() {
         PS1="$zen_dir $zen_gitstatus$zen_timer%f"$'\n'"$zen_prompt_style" # left prompt group
     elif [[ "$zen_mode" = "split" ]]; then
         PS1="$zen_prompt_style"                   # left prompt
-        RPS1="$zen_timer$zen_gitstatus$zen_dir%f" # right prompt
+        RPS1="$zen_timer $zen_gitstatus$zen_dir%f" # right prompt
     else
         echo "Unknown mode: $zen_mode"
         exit 1
@@ -89,7 +89,7 @@ convert_sec() {
     [[ $h -gt 0 ]] && hms+="$h""h "
     [[ $m -gt 0 ]] && hms+="$m""m "
     [[ $s -gt 0 ]] && hms+="$s""s "
-    echo "$hms" | xargs
+    echo "${hms% }"
 }
 
 # initiallize prompt theme
