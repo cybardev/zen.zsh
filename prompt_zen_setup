@@ -48,8 +48,7 @@ prompt_zen_precmd() {
     # save the duration of last command
     if [[ -n $timer ]]; then
         timer_show=$(($SECONDS - $timer))
-        timer_str="" # initialize to empty string
-        [[ "$timer_show" -ge "$zen_min_cmd_duration" ]] && timer_str="$(convert_sec timer_show)"
+        [[ "$timer_show" -ge "$zen_min_cmd_duration" ]] && timer_str="$(convert_sec timer_show)" || timer_str=""
         unset timer
     fi
 
@@ -70,7 +69,7 @@ prompt_zen_precmd() {
 
         PS1="$zen_dir $zen_gitstatus$zen_timer%f"$'\n'"$zen_prompt_style" # left prompt group
     elif [[ "$zen_mode" = "split" ]]; then
-        PS1="$zen_prompt_style"                   # left prompt
+        PS1="$zen_prompt_style"                    # left prompt
         RPS1="$zen_timer $zen_gitstatus$zen_dir%f" # right prompt
     else
         echo "Unknown mode: $zen_mode"
