@@ -31,7 +31,7 @@ After installing as above, `source ~/.zshrc` or relaunch the terminal to experie
 
 ### Credits
 
-Inspired by [this post](https://reddit.com/r/unixporn/comments/tvbh64/bspwm_dollar_store_qpwm_s/) on r/unixp\*rn.
+Inspired by [this post](https://reddit.com/r/unixporn/comments/tvbh64/bspwm_dollar_store_qpwm_s/) on [r/unixporn](https://reddit.com/r/unixporn/).
 
 ---
 
